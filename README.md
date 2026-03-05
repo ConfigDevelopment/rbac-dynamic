@@ -28,15 +28,24 @@ RBAC động giúp:
 
 1. **Xác thực (Authentication)**  
    Người dùng đăng nhập qua `User (IdentityUser<Guid>)`.
-
-2. **Phân quyền (Authorization)**  
+   Thuật toán signature RS256
+      Dùng 2 key
+         Private key → ký
+         Public key → verify
+      Lệnh gen privatekey 
+         openssl genrsa -out private.pem 2048
+      Lệnh gen publickey
+         openssl rsa -in private.pem -pubout -out public.pem
+     Lệnh mở thư mục lấy key
+         explorer .
+3. **Phân quyền (Authorization)**  
    Khi người dùng gọi API hoặc truy cập UI:
    - Hệ thống lấy danh sách **Permission** từ:
      - Quyền trực tiếp (`UserPermission`)  
      - Quyền theo nhóm (`UserPermissionGroup`)  
    - Kiểm tra xem user có quyền với **Function + Command** trong **Branch** hay không.  
 
-3. **Quản trị động**  
+4. **Quản trị động**  
    - Có thể thêm mới `Subsystem`, `Module`, `Function`, `Command` mà không cần sửa code.  
    - Admin chỉ cần định nghĩa `Permission` và gán cho `PermissionGroup` hoặc `User`.  
 
